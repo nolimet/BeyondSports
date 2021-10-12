@@ -1,9 +1,4 @@
 ﻿using BeyondSports.DataReader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -18,8 +13,6 @@ namespace Assets.Scripts
         public async void Start()
         {
             await dataReaderService.SetReaderPath($"File://{Application.streamingAssetsPath}/{fileName}");
-
-            Debug.Log(await dataReaderService.GetFrame(0));
         }
     }
 }
