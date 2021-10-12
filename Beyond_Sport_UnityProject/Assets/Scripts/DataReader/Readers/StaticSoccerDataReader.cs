@@ -108,7 +108,7 @@ namespace BeyondSports.DataReader
                         return new BallData();
 
                     var splitBall = splitLine[2].Split(',');
-                    if (splitBall.Length == 6)
+                    if (splitBall.Length > 4)
                     {
                         return new BallData
                         (
@@ -119,12 +119,12 @@ namespace BeyondSports.DataReader
                                 z: int.TryParse(splitBall[2], out int zPosition) ? zPosition * worldScale : 0
                             ),
                             speed: double.TryParse(splitBall[3], out double speed) ? speed : 0,
-                            flag: splitBall[5]
+                            flags: splitBall.Skip(3).ToArray()
                         );
                     }
                     else
                     {
-                        Debug.LogWarning($"failed to decode TrackingObject encountered {splitBall.Length} instead of 6 elements\n {splitLine[2]}");
+                        Debug.LogWarning($"failed to decode TrackingObject encountered {splitBall.Length} less than 4 elements\n {splitLine[2]}");
                         return new BallData();
                     }
                 }

@@ -32,13 +32,13 @@ namespace BeyondSports.DataReader
     {
         public readonly Vector3 position;
         public readonly double speed;
-        public readonly string flag;
+        public readonly string[] flags;
 
-        public BallData(Vector3 position, double speed, string flag)
+        public BallData(Vector3 position, double speed, string[] flags)
         {
             this.position = position;
             this.speed = speed;
-            this.flag = flag;
+            this.flags = flags;
         }
     }
 
