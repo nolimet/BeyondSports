@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6b71a79d8d4d740a99d862e93288a4, type: 3}
   m_Name: Main Installer
   m_EditorClassIdentifier: 
-  readerType: 0
+  dataReaderConfiguration: {fileID: 0}
+  humanoidPrefab: {fileID: 0}
+  ballPrefab: {fileID: 0}
