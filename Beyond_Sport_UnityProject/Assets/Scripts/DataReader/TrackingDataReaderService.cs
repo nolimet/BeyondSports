@@ -4,9 +4,14 @@ namespace BeyondSports.DataReader
 {
     public class TrackingDataReaderService
     {
-        public TrackingDataReaderService(IDataReader dataReader)
+        public TrackingDataReaderService(DataReaderConfiguration dataReaderConfiguration)
         {
-            this.dataReader = dataReader;
+            switch (dataReaderConfiguration.ReaderType)
+            {
+                case ReaderTypes.StaticSoccer:
+                    dataReader = new StaticSoccerDataReader();
+                    break;
+            }
         }
 
         private readonly IDataReader dataReader;
