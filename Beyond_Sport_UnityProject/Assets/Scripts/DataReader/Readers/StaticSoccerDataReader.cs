@@ -14,16 +14,16 @@ namespace BeyondSports.DataReader
         {
             if (loadedData != null)
             {
-                return (loadedData.frames.Min(x => x.frameID), loadedData.frames.Max(x => x.frameID));
+                return (loadedData.frames.Min(x => x.Key), loadedData.frames.Max(x => x.Key));
             }
             return (0, 0);
         }
 
         public async Task<TrackingFrame> GetFrame(long frameID)
         {
-            if (loadedData != null && loadedData.frames.LongLength < frameID)
+            if (loadedData != null && loadedData.frames.TryGetValue(frameID, out var frame))
             {
-                return loadedData.frames[frameID];
+                return frame;
             }
 
             return new TrackingFrame();
