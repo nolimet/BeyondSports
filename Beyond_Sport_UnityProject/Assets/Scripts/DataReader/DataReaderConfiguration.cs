@@ -27,5 +27,10 @@ namespace BeyondSports.DataReader
         public PathMode PathMode => pathMode;
 
         public float FramesPerSecond => framesPerSecond;
+
+        public string GetPath()
+        {
+            return PathProvider.GetPathFromConfiguration(this);
+        }
     }
 }
