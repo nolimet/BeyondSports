@@ -12,3 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ded96b9c281ad1409d63a7bf2a7bc96, type: 3}
   m_Name: Visualizer Configuration
   m_EditorClassIdentifier: 
+  fallbackTeamColor:
+    id: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+  teamColors:
+  - id: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - id: 1
+    color: {r: 0.021978855, g: 0, b: 1, a: 1}
+  - id: -1
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - id: 3
+    color: {r: 1, g: 0.49108696, b: 0, a: 1}
+  - id: 4
+    color: {r: 0, g: 0.550797, b: 1, a: 1}
