@@ -1,4 +1,5 @@
 ﻿using BeyondSports.DataReader;
+using BeyondSports.Playerback;
 using BeyondSports.Visualizer;
 using UnityEngine;
 using Zenject;
@@ -12,19 +13,26 @@ namespace BeyondSports
         private DataReaderConfiguration dataReaderConfiguration;
 
         [SerializeField]
-        private Visualizer.TrackedObject humanoidPrefab;
+        private VisualizerConfiguration visualizerConfiguration;
+
+        [SerializeField]
+        private TrackedObject humanoidPrefab;
 
         [SerializeField]
         private TrackedBall ballPrefab;
 
         public override void InstallBindings()
         {
+            visualizerConfiguration.SetupTeamColorLookup();
+
             Container.BindInstance(dataReaderConfiguration).AsSingle();
+            Container.BindInstance(visualizerConfiguration).AsSingle();
 
             Container.Bind<TrackingDataReaderService>().ToSelf().AsSingle();
             Container.Bind<VisualizerController>().ToSelf().AsSingle();
+            Container.Bind<PlaybackController>().ToSelf().AsSingle();
 
-            Container.BindFactory<Visualizer.TrackedObject, Visualizer.TrackedObject.Factory>().FromComponentInNewPrefab(humanoidPrefab);
+            Container.BindFactory<TrackedObject, TrackedObject.Factory>().FromComponentInNewPrefab(humanoidPrefab);
             Container.BindFactory<TrackedBall, TrackedBall.Factory>().FromComponentInNewPrefab(ballPrefab);
         }
     }
