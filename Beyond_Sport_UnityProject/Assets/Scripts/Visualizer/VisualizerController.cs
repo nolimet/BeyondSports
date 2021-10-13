@@ -7,14 +7,16 @@ namespace BeyondSports.Visualizer
     {
         private readonly TrackedObject.Factory objectFactory;
         private readonly TrackedBall.Factory ballFactory;
+        private readonly VisualizerConfiguration visualizerConfiguration;
 
         private readonly List<TrackedObject> trackedObjects = new List<TrackedObject>();
         private readonly List<TrackedBall> trackedBalls = new List<TrackedBall>();
 
-        public VisualizerController(TrackedObject.Factory objectFactory, TrackedBall.Factory ballFactory)
+        public VisualizerController(TrackedObject.Factory objectFactory, TrackedBall.Factory ballFactory, VisualizerConfiguration visualizerConfiguration)
         {
             this.objectFactory = objectFactory;
             this.ballFactory = ballFactory;
+            this.visualizerConfiguration = visualizerConfiguration;
         }
 
         public void ApplyFrame(TrackingFrame frame)
@@ -30,6 +32,11 @@ namespace BeyondSports.Visualizer
 
             if (frame.balls.Length > trackedBalls.Count)
             {
+                int missingBalls = frame.balls.Length - trackedBalls.Count;
+                for (int i = 0; i < missingBalls; i++)
+                {
+                    trackedBalls.Add(ballFactory.Create());
+                }
             }
         }
     }
