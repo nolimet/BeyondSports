@@ -27,4 +27,9 @@ public class PlaybackUIController : MonoBehaviour
     {
         await playbackController.JumpToFrame(value);
     }
+
+    public void SetPlaying(bool isPlaying)
+    {
+        playbackController.SetPlaying(isPlaying);
+    }
 }

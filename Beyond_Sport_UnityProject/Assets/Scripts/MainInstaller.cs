@@ -30,7 +30,7 @@ namespace BeyondSports
 
             Container.Bind<TrackingDataReaderService>().ToSelf().AsSingle();
             Container.Bind<VisualizerController>().ToSelf().AsSingle();
-            Container.Bind<PlaybackController>().ToSelf().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlaybackController>().AsSingle();
 
             Container.BindFactory<TrackedObject, TrackedObject.Factory>().FromComponentInNewPrefab(humanoidPrefab);
             Container.BindFactory<TrackedBall, TrackedBall.Factory>().FromComponentInNewPrefab(ballPrefab);
