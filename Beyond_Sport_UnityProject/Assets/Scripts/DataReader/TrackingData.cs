@@ -16,13 +16,15 @@ namespace BeyondSports.DataReader
     {
         public readonly long frameID;
         public readonly TrackedObject[] trackedObjects;
-        public readonly BallData ball;
+        public readonly BallData[] balls;
+        public readonly string[] flags;
 
-        public TrackingFrame(long frameID, TrackedObject[] trackedObjects, BallData ball)
+        public TrackingFrame(long frameID, TrackedObject[] trackedObjects, BallData[] balls, string[] flags)
         {
             this.frameID = frameID;
             this.trackedObjects = trackedObjects;
-            this.ball = ball;
+            this.balls = balls;
+            this.flags = flags;
         }
     }
 
@@ -30,13 +32,11 @@ namespace BeyondSports.DataReader
     {
         public readonly Vector3 position;
         public readonly double speed;
-        public readonly string[] flags;
 
-        public BallData(Vector3 position, double speed, string[] flags)
+        public BallData(Vector3 position, double speed)
         {
             this.position = position;
             this.speed = speed;
-            this.flags = flags;
         }
     }
 

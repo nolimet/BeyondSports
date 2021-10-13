@@ -50,18 +50,21 @@ namespace BeyondSports.DataReader
         private TrackingData DecodeData(string rawData)
         {
             var lines = rawData.Split('\n');
+
             return new TrackingData
                 (
-                    //new TrackingFrame[] { GetFrame(lines.First()) }
                     lines.Select(line => GetFrame(line)).ToArray()
                 );
 
             TrackingFrame GetFrame(string rawLine)
             {
                 var splitLine = rawLine.Split(':');
+                var splitTrackingObjects = splitLine[1].Split(';');
+                var splitBall = splitLine[2].Split(',');
+
                 long frameID = long.TryParse(splitLine[0], out frameID) ? frameID : -1;
 
-                return new TrackingFrame(frameID, GetTrackingObjects(), GetBall());
+                return new TrackingFrame(frameID, GetTrackingObjects(), new[] { GetBall() }, splitBall.Skip(3).ToArray());
 
                 TrackedObject[] GetTrackingObjects()
                 {
@@ -70,8 +73,7 @@ namespace BeyondSports.DataReader
                         return new TrackedObject[0];
                     }
 
-                    var rawTrackingObjects = splitLine[1].Split(';');
-                    return rawTrackingObjects.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => GetTrackingObject(x)).ToArray();
+                    return splitTrackingObjects.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => GetTrackingObject(x)).ToArray();
 
                     TrackedObject GetTrackingObject(string rawTrackingObject)
                     {
@@ -99,12 +101,12 @@ namespace BeyondSports.DataReader
                         }
                     }
                 }
+
                 BallData GetBall()
                 {
                     if (splitLine.Length <= 2)
                         return new BallData();
 
-                    var splitBall = splitLine[2].Split(',');
                     if (splitBall.Length > 4)
                     {
                         return new BallData
@@ -115,8 +117,7 @@ namespace BeyondSports.DataReader
                                 y: int.TryParse(splitBall[1], out int yPosition) ? yPosition * worldScale : 0,
                                 z: int.TryParse(splitBall[2], out int zPosition) ? zPosition * worldScale : 0
                             ),
-                            speed: double.TryParse(splitBall[3], out double speed) ? speed : 0,
-                            flags: splitBall.Skip(3).ToArray()
+                            speed: double.TryParse(splitBall[3], out double speed) ? speed : 0
                         );
                     }
                     else
