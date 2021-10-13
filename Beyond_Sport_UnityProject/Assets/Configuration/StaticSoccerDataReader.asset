@@ -15,4 +15,4 @@ MonoBehaviour:
   readerType: 1
   pathMode: 1
   filePath: match_data.dat
-  framesPerSecond: 0
+  framesPerSecond: 25
