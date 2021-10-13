@@ -3,11 +3,11 @@ using Zenject;
 
 namespace BeyondSports.Visualizer
 {
-    public class TrackedHumanoid : BaseTrackedObject
+    public class TrackedObject : BaseTrackedObject
     {
-        public class Factory : PlaceholderFactory<TrackedHumanoid>
+        public class Factory : PlaceholderFactory<TrackedObject>
         {
-            public TrackedHumanoid Create(Color color)
+            public TrackedObject Create(Color color)
             {
                 var newTrackedHumanoid = base.Create();
                 newTrackedHumanoid.SetColor(color);
