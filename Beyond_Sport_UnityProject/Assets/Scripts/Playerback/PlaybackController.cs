@@ -26,8 +26,9 @@ namespace BeyondSports.Playerback
             return frameRange;
         }
 
-        public void JumpToFrame(int value)
+        public async Task JumpToFrame(long value)
         {
+            visualizerController.ApplyFrame(await readerService.GetFrame(value));
         }
     }
 }
