@@ -38,6 +38,36 @@ namespace BeyondSports.Visualizer
                     trackedBalls.Add(ballFactory.Create());
                 }
             }
+
+            for (int i = 0; i < trackedObjects.Count; i++)
+            {
+                var trackedObject = trackedObjects[i];
+                if (frame.trackedObjects.Length < i)
+                {
+                    trackedObject.SetActive(true);
+                    var FrameTrackedObject = frame.trackedObjects[i];
+                    trackedObject.ApplyFrame(FrameTrackedObject, visualizerConfiguration);
+                }
+                else
+                {
+                    trackedObject.SetActive(false);
+                }
+            }
+
+            for (int i = 0; i < trackedBalls.Count; i++)
+            {
+                var trackedBall = trackedBalls[i];
+                if (frame.trackedObjects.Length < i)
+                {
+                    trackedBall.SetActive(true);
+                    var FrameTrackedObject = frame.balls[i];
+                    trackedBall.ApplyFrame(FrameTrackedObject);
+                }
+                else
+                {
+                    trackedBall.SetActive(false);
+                }
+            }
         }
     }
 }
