@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -34,11 +34,19 @@ namespace BeyondSports.DataReader
             loadedData = null;
             using (var webRequest = UnityWebRequest.Get(path))
             {
+                Debug.Log("Download Started");
                 await webRequest.SendWebRequest();
 
                 if (webRequest.result == UnityWebRequest.Result.Success)
                 {
-                    loadedData = DecodeData(webRequest.downloadHandler.text);
+                    string data = webRequest.downloadHandler.text;
+                    Debug.Log("Download Completed");
+                    await Task.Run(() =>
+                    {
+                        Debug.Log("Decoding Started");
+                        loadedData = DecodeData(data);
+                        Debug.Log("Decoding Completed");
+                    });
                 }
                 else
                 {
