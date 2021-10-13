@@ -15,11 +15,11 @@ namespace BeyondSports.DataReader
     public readonly struct TrackingFrame
     {
         public readonly long frameID;
-        public readonly TrackedObject[] trackedObjects;
-        public readonly BallData[] balls;
+        public readonly TrackedObjectData[] trackedObjects;
+        public readonly TrackedBallData[] balls;
         public readonly string[] flags;
 
-        public TrackingFrame(long frameID, TrackedObject[] trackedObjects, BallData[] balls, string[] flags)
+        public TrackingFrame(long frameID, TrackedObjectData[] trackedObjects, TrackedBallData[] balls, string[] flags)
         {
             this.frameID = frameID;
             this.trackedObjects = trackedObjects;
@@ -28,19 +28,19 @@ namespace BeyondSports.DataReader
         }
     }
 
-    public readonly struct BallData
+    public readonly struct TrackedBallData
     {
         public readonly Vector3 position;
         public readonly double speed;
 
-        public BallData(Vector3 position, double speed)
+        public TrackedBallData(Vector3 position, double speed)
         {
             this.position = position;
             this.speed = speed;
         }
     }
 
-    public readonly struct TrackedObject
+    public readonly struct TrackedObjectData
     {
         public readonly int id;
         public readonly int teamId;
@@ -48,7 +48,7 @@ namespace BeyondSports.DataReader
         public readonly Vector3 position;
         public readonly double speed;
 
-        public TrackedObject(int id, int teamId, int shirtNumber, Vector3 position, double speed)
+        public TrackedObjectData(int id, int teamId, int shirtNumber, Vector3 position, double speed)
         {
             this.id = id;
             this.teamId = teamId;

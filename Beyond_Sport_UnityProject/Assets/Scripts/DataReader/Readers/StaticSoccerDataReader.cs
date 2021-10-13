@@ -66,22 +66,22 @@ namespace BeyondSports.DataReader
 
                 return new TrackingFrame(frameID, GetTrackingObjects(), new[] { GetBall() }, splitBall.Skip(3).ToArray());
 
-                TrackedObject[] GetTrackingObjects()
+                TrackedObjectData[] GetTrackingObjects()
                 {
                     if (splitLine.Length <= 1)
                     {
-                        return new TrackedObject[0];
+                        return new TrackedObjectData[0];
                     }
 
                     return splitTrackingObjects.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => GetTrackingObject(x)).ToArray();
 
-                    TrackedObject GetTrackingObject(string rawTrackingObject)
+                    TrackedObjectData GetTrackingObject(string rawTrackingObject)
                     {
                         var splitTrackingObject = rawTrackingObject.Split(',');
 
                         if (splitTrackingObject.Length == 6)
                         {
-                            return new TrackedObject
+                            return new TrackedObjectData
                                 (
                                     teamId: int.TryParse(splitTrackingObject[0], out int teamID) ? teamID : -1,
                                     id: int.TryParse(splitTrackingObject[1], out int id) ? id : -1,
@@ -97,19 +97,19 @@ namespace BeyondSports.DataReader
                         else
                         {
                             Debug.LogWarning($"failed to decode TrackingObject encountered {splitTrackingObject.Length} instead of 6 elements\n {rawTrackingObject}");
-                            return new TrackedObject();
+                            return new TrackedObjectData();
                         }
                     }
                 }
 
-                BallData GetBall()
+                TrackedBallData GetBall()
                 {
                     if (splitLine.Length <= 2)
-                        return new BallData();
+                        return new TrackedBallData();
 
                     if (splitBall.Length > 4)
                     {
-                        return new BallData
+                        return new TrackedBallData
                         (
                             position: new Vector3
                             (
@@ -123,7 +123,7 @@ namespace BeyondSports.DataReader
                     else
                     {
                         Debug.LogWarning($"failed to decode TrackingObject encountered {splitBall.Length} less than 4 elements\n {splitLine[2]}");
-                        return new BallData();
+                        return new TrackedBallData();
                     }
                 }
             }
