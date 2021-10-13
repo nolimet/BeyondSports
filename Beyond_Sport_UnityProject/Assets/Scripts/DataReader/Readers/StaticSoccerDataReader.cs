@@ -120,8 +120,8 @@ namespace BeyondSports.DataReader
                             position: new Vector3
                             (
                                 x: int.TryParse(splitBall[0], out int xPosition) ? xPosition * worldScale : 0,
-                                y: int.TryParse(splitBall[1], out int yPosition) ? yPosition * worldScale : 0,
-                                z: int.TryParse(splitBall[2], out int zPosition) ? zPosition * worldScale : 0
+                                y: int.TryParse(splitBall[2], out int yPosition) ? yPosition * worldScale : 0,
+                                z: int.TryParse(splitBall[1], out int zPosition) ? zPosition * worldScale : 0
                             ),
                             speed: double.TryParse(splitBall[3], out double speed) ? speed : 0
                         );
