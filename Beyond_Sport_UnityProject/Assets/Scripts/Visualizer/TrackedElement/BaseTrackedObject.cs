@@ -17,9 +17,12 @@ namespace BeyondSports.Visualizer
             }
         }
 
-        public void SetPosition(Vector3 position)
+        public void SetActive(bool isActive)
         {
-            transform.position = position;
+            foreach (var renderer in renderers)
+            {
+                renderer.enabled = isActive;
+            }
         }
     }
 }
