@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6b71a79d8d4d740a99d862e93288a4, type: 3}
   m_Name: Main Installer
   m_EditorClassIdentifier: 
-  dataReaderConfiguration: {fileID: 0}
-  humanoidPrefab: {fileID: 0}
-  ballPrefab: {fileID: 0}
+  dataReaderConfiguration: {fileID: 11400000, guid: 601de1cd944b609458c1ddc0f818ecb3, type: 2}
+  visualizerConfiguration: {fileID: 11400000, guid: 0c88ff6a6c7145943acccfbef68acc90, type: 2}
+  humanoidPrefab: {fileID: 584945489399978432, guid: fb2af7977b9247a47b743357c9294be0, type: 3}
+  ballPrefab: {fileID: 2149698228671815430, guid: 4728efe523af19a47a5ed9479e88ed01, type: 3}
