@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BeyondSports.DataReader
 {
     public class TrackingData
     {
-        public readonly TrackingFrame[] frames;
+        public readonly IReadOnlyDictionary<long, TrackingFrame> frames;
 
-        public TrackingData(TrackingFrame[] frames)
+        public TrackingData(IReadOnlyDictionary<long, TrackingFrame> frames)
         {
             this.frames = frames;
         }
