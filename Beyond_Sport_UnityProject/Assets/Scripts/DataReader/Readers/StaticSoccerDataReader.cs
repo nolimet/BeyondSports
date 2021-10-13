@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -61,29 +61,29 @@ namespace BeyondSports.DataReader
 
             return new TrackingData
                 (
-                    lines.Select(line => GetFrame(line)).ToArray()
+                    lines.Where(line => !string.IsNullOrEmpty(line)).Select(line => DecodeFrame(line)).ToDictionary(k => k.frameID, v => v)
                 );
 
-            TrackingFrame GetFrame(string rawLine)
+            TrackingFrame DecodeFrame(string rawLine)
             {
                 var splitLine = rawLine.Split(':');
-                var splitTrackingObjects = splitLine[1].Split(';');
-                var splitBall = splitLine[2].Split(',');
+                string[] splitTrackingObjects = splitLine.Length > 1 ? splitLine[1].Split(';') : new string[0];
+                string[] splitBall = splitLine.Length > 2 ? splitLine[2].Split(',') : new string[0];
 
-                long frameID = long.TryParse(splitLine[0], out frameID) ? frameID : -1;
+                long frameID = long.TryParse(splitLine[0], out frameID) ? frameID : long.MinValue;
 
-                return new TrackingFrame(frameID, GetTrackingObjects(), new[] { GetBall() }, splitBall.Skip(3).ToArray());
+                return new TrackingFrame(frameID, DecodeTrackedObjects(), new[] { DecodeBall() }, splitBall.Length > 3 ? splitBall.Skip(3).ToArray() : new string[0]);
 
-                TrackedObjectData[] GetTrackingObjects()
+                TrackedObjectData[] DecodeTrackedObjects()
                 {
-                    if (splitLine.Length <= 1)
+                    if (splitTrackingObjects.Length == 0)
                     {
                         return new TrackedObjectData[0];
                     }
 
-                    return splitTrackingObjects.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => GetTrackingObject(x)).ToArray();
+                    return splitTrackingObjects.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => DecodeTrackedObject(x)).ToArray();
 
-                    TrackedObjectData GetTrackingObject(string rawTrackingObject)
+                    TrackedObjectData DecodeTrackedObject(string rawTrackingObject)
                     {
                         var splitTrackingObject = rawTrackingObject.Split(',');
 
@@ -110,11 +110,8 @@ namespace BeyondSports.DataReader
                     }
                 }
 
-                TrackedBallData GetBall()
+                TrackedBallData DecodeBall()
                 {
-                    if (splitLine.Length <= 2)
-                        return new TrackedBallData();
-
                     if (splitBall.Length > 4)
                     {
                         return new TrackedBallData
@@ -130,7 +127,11 @@ namespace BeyondSports.DataReader
                     }
                     else
                     {
-                        Debug.LogWarning($"failed to decode TrackingObject encountered {splitBall.Length} less than 4 elements\n {splitLine[2]}");
+                        if (splitLine.Length > 2)
+                        {
+                            Debug.LogWarning($"failed to decode TrackingObject encountered {splitBall.Length} less than 4 elements\n {splitLine[2]}");
+                        }
+
                         return new TrackedBallData();
                     }
                 }
