@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -97,7 +97,8 @@ namespace BeyondSports.DataReader
                                     position: new Vector3
                                     (
                                         x: int.TryParse(splitTrackingObject[3], out int xPosition) ? xPosition * worldScale : 0,
-                                        y: int.TryParse(splitTrackingObject[4], out int yPosition) ? yPosition * worldScale : 0
+                                        z: int.TryParse(splitTrackingObject[4], out int yPosition) ? yPosition * worldScale : 0,
+                                        y: 0
                                     ),
                                     speed: double.TryParse(splitTrackingObject[5], out double speed) ? speed : 0
                                 );
