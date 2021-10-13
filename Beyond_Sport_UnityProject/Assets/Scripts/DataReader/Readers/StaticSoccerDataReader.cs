@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,13 +10,13 @@ namespace BeyondSports.DataReader
         private readonly float worldScale = 0.01f;
         private TrackingData loadedData;
 
-        public async Task<long> GetFrameCount()
+        public async Task<(long start, long end)> GetFrameRange()
         {
             if (loadedData != null)
             {
-                return loadedData.frames.Length;
+                return (loadedData.frames.Min(x => x.frameID), loadedData.frames.Max(x => x.frameID));
             }
-            return 0;
+            return (0, 0);
         }
 
         public async Task<TrackingFrame> GetFrame(long frameID)

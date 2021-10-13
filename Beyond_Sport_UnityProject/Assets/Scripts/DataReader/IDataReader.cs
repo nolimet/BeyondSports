@@ -8,6 +8,6 @@ namespace BeyondSports.DataReader
 
         Task<TrackingFrame> GetFrame(long frameID);
 
-        Task<long> GetFrameCount();
+        Task<(long start, long end)> GetFrameRange();
     }
 }

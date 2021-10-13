@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace BeyondSports.DataReader
 {
@@ -21,9 +21,9 @@ namespace BeyondSports.DataReader
             return await dataReader.GetFrame(frameID);
         }
 
-        public async Task<long> GetFrameCount()
+        public async Task<(long start, long end)> GetFrameRange()
         {
-            return await dataReader.GetFrameCount();
+            return await dataReader.GetFrameRange();
         }
 
         public async Task SetReaderPath(string path)
