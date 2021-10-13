@@ -12,7 +12,7 @@ namespace BeyondSports
         private DataReaderConfiguration dataReaderConfiguration;
 
         [SerializeField]
-        private TrackedHumanoid humanoidPrefab;
+        private Visualizer.TrackedObject humanoidPrefab;
 
         [SerializeField]
         private TrackedBall ballPrefab;
@@ -24,7 +24,7 @@ namespace BeyondSports
             Container.Bind<TrackingDataReaderService>().ToSelf().AsSingle();
             Container.Bind<VisualizerController>().ToSelf().AsSingle();
 
-            Container.BindFactory<TrackedHumanoid, TrackedHumanoid.Factory>().FromComponentInNewPrefab(humanoidPrefab);
+            Container.BindFactory<Visualizer.TrackedObject, Visualizer.TrackedObject.Factory>().FromComponentInNewPrefab(humanoidPrefab);
             Container.BindFactory<TrackedBall, TrackedBall.Factory>().FromComponentInNewPrefab(ballPrefab);
         }
     }
