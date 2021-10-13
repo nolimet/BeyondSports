@@ -19,8 +19,13 @@ namespace BeyondSports.DataReader
         [SerializeField]
         private string filePath;
 
+        [SerializeField]
+        private float framesPerSecond; //Doing it as a float se can have less than one whole frame each second
+
         public string FilePath => filePath;
         public ReaderTypes ReaderType => readerType;
         public PathMode PathMode => pathMode;
+
+        public float FramesPerSecond => framesPerSecond;
     }
 }
