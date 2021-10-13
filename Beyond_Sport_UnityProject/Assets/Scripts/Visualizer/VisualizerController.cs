@@ -42,7 +42,7 @@ namespace BeyondSports.Visualizer
             for (int i = 0; i < trackedObjects.Count; i++)
             {
                 var trackedObject = trackedObjects[i];
-                if (frame.trackedObjects.Length < i)
+                if (i < frame.trackedObjects.Length)
                 {
                     trackedObject.SetActive(true);
                     var FrameTrackedObject = frame.trackedObjects[i];
@@ -57,7 +57,7 @@ namespace BeyondSports.Visualizer
             for (int i = 0; i < trackedBalls.Count; i++)
             {
                 var trackedBall = trackedBalls[i];
-                if (frame.trackedObjects.Length < i)
+                if (i < frame.trackedObjects.Length)
                 {
                     trackedBall.SetActive(true);
                     var FrameTrackedObject = frame.balls[i];
