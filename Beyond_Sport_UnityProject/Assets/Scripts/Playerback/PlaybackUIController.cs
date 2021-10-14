@@ -1,9 +1,13 @@
 using BeyondSports.Playerback;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class PlaybackUIController : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent<bool> OnLoadingFirstFrame;
+
     private PlaybackController playbackController;
     private (long start, long end) frameRange;
 
@@ -15,7 +19,9 @@ public class PlaybackUIController : MonoBehaviour
 
     public async void LoadFirstFrame()
     {
+        OnLoadingFirstFrame?.Invoke(true);
         frameRange = await playbackController.LoadFirstFrame();
+        OnLoadingFirstFrame?.Invoke(false);
     }
 
     public async void SetFirstFrame()
